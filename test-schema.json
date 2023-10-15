@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/Welcome4Element"
+    },
+    "definitions": {
+        "Welcome4Element": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "data"
+            ],
+            "title": "Welcome4Element"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "jobListings": {
+                    "$ref": "#/definitions/JobListings"
+                }
+            },
+            "required": [
+                "jobListings"
+            ],
+            "title": "Data"
+        },
+        "JobListings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "indeedCtk": {
+                    "type": "string"
+                },
+                "jobListings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/JobListing"
+                    }
+                }
+            },
+            "required": [
+                "indeedCtk",
+                "jobListings"
+            ],
+            "title": "JobListings"
+        },
+        "JobListing": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "jobview": {
+                    "$ref": "#/definitions/Jobview"
+                }
+            },
+            "required": [
+                "jobview"
+            ],
+            "title": "JobListing"
+        },
+        "Jobview": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "header": {
+                    "$ref": "#/definitions/Header"
+                }
+            },
+            "required": [
+                "header"
+            ],
+            "title": "Jobview"
+        },
+        "Header": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "adOrderId": {
+                    "type": "integer"
+                },
+                "advertiserType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "adOrderId",
+                "advertiserType"
+            ],
+            "title": "Header"
+        }
+    }
+}
