@@ -47,6 +47,11 @@ def get_property_type(property):
 
 def generate_model(model_name, properties, model_namespace):
     model_content = ""
+
+    # clear properties with name __typename
+    if ("__typename" in properties):
+        del properties["__typename"]
+
     for propertyKey, property in properties.items():
         type = get_property_type(property)
         if(not type in ["int", "str", "list"]):
@@ -70,6 +75,10 @@ def generate_model(model_name, properties, model_namespace):
 
 def generate_schema(schema_name, properties, schema_namespace):
     schema_content = "from marshmallow import Schema, fields\n"
+
+    # clear properties with name __typename
+    if("__typename" in properties):
+        del properties["__typename"]
 
     for propertyKey, property in properties.items():
         type, many = get_property_marshmallow_type(property)
@@ -133,13 +142,15 @@ def main():
 
         print("Generating " + key)
 
-        model_content = generate_model(key, value["properties"], model_namespace)
+        if ("properties" in value):
+            model_content = generate_model(key, value["properties"], model_namespace)
 
         model_file = open(model_path, 'w')
         model_file.write(model_content)
         model_file.close()
 
-        schema_content = generate_schema(key + "Schema", value["properties"], schema_namespace)
+        if("properties" in value):
+            schema_content = generate_schema(key + "Schema", value["properties"], schema_namespace)
 
         schema_file = open(schema_path, 'w')
         schema_file.write(schema_content)
