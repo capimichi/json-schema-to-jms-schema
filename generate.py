@@ -3,7 +3,7 @@ import os
 import sys
 import argparse
 
-def get_property_marshmallow_type(property):
+def get_property_marshmallow_type(property, definitions):
 
     type = ""
     many = False
@@ -14,21 +14,40 @@ def get_property_marshmallow_type(property):
         # replace integer with int
         if (type == "integer"):
             type = "Int"
+        elif type == "number":
+            type = "Float"
+        elif type == "object":
+            type = property['title']
         elif type == "array":
             type = "List"
-            if("items" in property and "$ref" in property["items"]):
-                ref = property["items"]["$ref"]
-                type = ref.split("/")[-1]
+            if("items" in property):
+                items = property['items']
+                type, tmp = get_property_marshmallow_type(items, definitions)
             many = True
         elif type == "string":
             type = "Str"
+        elif type == "boolean":
+            type = "Boolean"
+        elif type == "null":
+            type = ""
+    elif "anyOf" in property:
+        for possible in property['anyOf']:
+            if("type" in possible):
+                if(len(type) <= 0):
+                    type, tmp = get_property_marshmallow_type(possible, definitions)
     elif "$ref" in property:
         type = property["$ref"].split("/")[-1]
+
+        if (type in definitions):
+            definition = definitions[type]
+            if (not "properties" in definition and "type" in definition):
+                type, tmp = get_property_marshmallow_type(definition, definitions)
+
 
     return type, many
 
 def get_property_type(property):
-    type = "str"
+    type = ""
 
     if ("type" in property):
         type = property["type"]
@@ -36,10 +55,23 @@ def get_property_type(property):
         # replace integer with int
         if (type == "integer"):
             type = "int"
+        elif type == "number":
+            type = "float"
         elif type == "array":
             type = "list"
+        elif type == "object":
+            type = property['title']
         elif type == "string":
             type = "str"
+        elif type == "boolean":
+            type = "bool"
+        elif type == "null":
+            type = ""
+    elif "anyOf" in property:
+        for possible in property['anyOf']:
+            if("type" in possible):
+                if(len(type) <= 0):
+                    type = get_property_type(possible)
     elif "$ref" in property:
         type = property["$ref"].split("/")[-1]
 
@@ -52,9 +84,15 @@ def generate_model(model_name, properties, model_namespace):
     if ("__typename" in properties):
         del properties["__typename"]
 
+    # remove properties with empty type
+    for propertyKey, property in list(properties.items()):
+        type = get_property_type(property)
+        if(type == ""):
+            del properties[propertyKey]
+
     for propertyKey, property in properties.items():
         type = get_property_type(property)
-        if(not type in ["int", "str", "list"]):
+        if(not type in ["int", "float", "str", "list", "bool"]):
             model_content += "from " + model_namespace + "." + type + " import " + type + "\n"
 
     model_content += "\n"
@@ -73,29 +111,42 @@ def generate_model(model_name, properties, model_namespace):
 
     return model_content
 
-def generate_schema(schema_name, properties, schema_namespace):
-    schema_content = "from marshmallow import Schema, fields\n"
+def generate_schema(schema_name, properties, definitions, schema_namespace, fields_namespace):
+    schema_content = "from " + fields_namespace + " import Schema, fields\n"
+
+    schema_content += "from marshmallow import EXCLUDE\n"
 
     # clear properties with name __typename
     if("__typename" in properties):
         del properties["__typename"]
 
+    # remove properties with empty type
+    for propertyKey, property in list(properties.items()):
+        type = get_property_type(property)
+        if(type == ""):
+            del properties[propertyKey]
+
     for propertyKey, property in properties.items():
-        type, many = get_property_marshmallow_type(property)
-        if(not type in ["Int", "Str", "List"]):
+        type, many = get_property_marshmallow_type(property, definitions)
+        if(not type in ["Int", "Float", "Str", "List", "Boolean"]):
             schema_content += "from " + schema_namespace + "." + type + "Schema import " + type + "Schema\n"
 
     schema_content += "\n"
 
     schema_content += "class " + schema_name + "(Schema):\n"
+    schema_content += "\tclass Meta:\n"
+    schema_content += "\t\tunknown = EXCLUDE\n"
 
     for propertyKey, property in properties.items():
-        type, many = get_property_marshmallow_type(property)
-        if(type in ["Int", "Str", "List"]):
-            schema_content += "\t" + propertyKey + " = fields." + type + "()\n"
+        type, many = get_property_marshmallow_type(property, definitions)
+        if(type in ["Int", "Float", "Str", "List", "Boolean"]):
+            if(many):
+                schema_content += "\t" + propertyKey + " = fields.List(fields." + type + "(), required=False, allow_none=True)\n"
+            else:
+                schema_content += "\t" + propertyKey + " = fields." + type + "(required=False, allow_none=True)\n"
         else:
             many_string = "True" if many else "False"
-            schema_content += "\t" + propertyKey + " = fields.Nested(" + type + "Schema, many=" + many_string + ")\n"
+            schema_content += "\t" + propertyKey + " = fields.Nested(" + type + "Schema, many=" + many_string + ", required=False, allow_none=True)\n"
 
     return schema_content
 
@@ -106,6 +157,7 @@ def main():
     parser.add_argument('schema_output_folder', metavar='schema_output_folder', type=str, help='Path to the output folder')
     parser.add_argument('--model_namespace', metavar='model_namespace', type=str, help='Namespace for the models', default="models")
     parser.add_argument('--schema_namespace', metavar='schema_namespace', type=str, help='Namespace for the schemas', default="schemas")
+    parser.add_argument('--fields_namespace', metavar='fields_namespace', type=str, help='Namespace for the fields', default="marshmallow")
 
     args = parser.parse_args()
 
@@ -115,6 +167,7 @@ def main():
 
     model_namespace = args.model_namespace
     schema_namespace = args.schema_namespace
+    fields_namespace = args.fields_namespace
 
     # read json schema
     json_schema_file = open(json_schema_path, 'r')
@@ -144,17 +197,15 @@ def main():
 
         if ("properties" in value):
             model_content = generate_model(key, value["properties"], model_namespace)
-
-        model_file = open(model_path, 'w')
-        model_file.write(model_content)
-        model_file.close()
+            model_file = open(model_path, 'w')
+            model_file.write(model_content)
+            model_file.close()
 
         if("properties" in value):
-            schema_content = generate_schema(key + "Schema", value["properties"], schema_namespace)
-
-        schema_file = open(schema_path, 'w')
-        schema_file.write(schema_content)
-        schema_file.close()
+            schema_content = generate_schema(key + "Schema", value["properties"], json_schema['definitions'], schema_namespace, fields_namespace)
+            schema_file = open(schema_path, 'w')
+            schema_file.write(schema_content)
+            schema_file.close()
 
 
 if(__name__ == '__main__'):
