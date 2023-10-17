@@ -60,7 +60,7 @@ class ModelGeneratorHelper:
 
     def get_model_content(self, model_name, model_properties, namespace):
         content = "<?php\n\n"
-        content += "namespace " + namespace + "\n\n"
+        content += "namespace " + namespace + ";\n\n"
         content += "use JMS\Serializer\Annotation as Serializer;\n\n"
         content += "/**\n"
         content += "* Class " + model_name + "\n"
