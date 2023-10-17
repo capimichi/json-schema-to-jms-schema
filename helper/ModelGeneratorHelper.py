@@ -144,7 +144,7 @@ class ModelGeneratorHelper:
                     type = items["type"]
                     type = self.get_type_mapped(type)
 
-            if (len(type) > 0):
+            if (len(type) > 0 and type != "null"):
                 model_property = ModelProperty(name=property_key, type=type, many=many, namespace=namespace)
                 model_properties.append(model_property)
 
