@@ -43,3 +43,10 @@ class ModelProperty:
         full_type = self.get_full_type(default_types)
         serialized_type = full_type if not self.many else "array<" + full_type + ">"
         return serialized_type
+
+    def get_setter_type(self, default_types):
+        full_type = self.get_full_type(default_types)
+        if (self.many):
+            return "array"
+        else:
+            return full_type

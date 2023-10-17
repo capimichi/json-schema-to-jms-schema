@@ -178,7 +178,7 @@ class ModelGeneratorHelper:
         content += "\t * @param " + var_type + " $" + model_property.get_camel_case_name() + "\n"
         content += "\t * @return $this\n"
         content += "\t */\n"
-        content += "\tpublic function set" + model_property.get_pascal_case_name() + "(" + var_type + " $" + model_property.get_camel_case_name() + ")\n"
+        content += "\tpublic function set" + model_property.get_pascal_case_name() + "(" + model_property.get_setter_type(self.get_mappings()) + " $" + model_property.get_camel_case_name() + ")\n"
         content += "\t{\n"
         content += "\t\t$this->" + model_property.get_camel_case_name() + " = $" + model_property.get_camel_case_name() + ";\n"
         content += "\t\treturn $this;\n"
