@@ -1,2 +1,2 @@
-# json-schema-to-marshmallow-schema
-Convert json schema to marshmallow schema
+# json-schema-to-jms-schema
+Convert json schema to jms schema

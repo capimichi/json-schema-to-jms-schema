@@ -1,98 +1,1144 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
-    "type": "array",
-    "items": {
-        "$ref": "#/definitions/Welcome4Element"
-    },
+    "$ref": "#/definitions/Welcome9",
     "definitions": {
-        "Welcome4Element": {
+        "Welcome9": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "data": {
-                    "$ref": "#/definitions/Data"
-                }
-            },
-            "required": [
-                "data"
-            ],
-            "title": "Welcome4Element"
-        },
-        "Data": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "jobListings": {
-                    "$ref": "#/definitions/JobListings"
-                }
-            },
-            "required": [
-                "jobListings"
-            ],
-            "title": "Data"
-        },
-        "JobListings": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "indeedCtk": {
-                    "type": "string"
-                },
-                "jobListings": {
+                "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/JobListing"
+                        "$ref": "#/definitions/Welcome9Item"
+                    }
+                },
+                "search_criteria": {
+                    "$ref": "#/definitions/SearchCriteria"
+                },
+                "total_count": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "items",
+                "search_criteria",
+                "total_count"
+            ],
+            "title": "Welcome9"
+        },
+        "Welcome9Item": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "base_currency_code": {
+                    "$ref": "#/definitions/CurrencyCode"
+                },
+                "base_discount_amount": {
+                    "type": "integer"
+                },
+                "base_discount_canceled": {
+                    "type": "integer"
+                },
+                "base_grand_total": {
+                    "type": "number"
+                },
+                "base_discount_tax_compensation_amount": {
+                    "type": "integer"
+                },
+                "base_shipping_amount": {
+                    "type": "integer"
+                },
+                "base_shipping_canceled": {
+                    "type": "integer"
+                },
+                "base_shipping_discount_amount": {
+                    "type": "integer"
+                },
+                "base_shipping_discount_tax_compensation_amnt": {
+                    "type": "integer"
+                },
+                "base_shipping_incl_tax": {
+                    "type": "integer"
+                },
+                "base_shipping_tax_amount": {
+                    "type": "integer"
+                },
+                "base_subtotal": {
+                    "type": "number"
+                },
+                "base_subtotal_canceled": {
+                    "type": "number"
+                },
+                "base_subtotal_incl_tax": {
+                    "type": "number"
+                },
+                "base_tax_amount": {
+                    "type": "number"
+                },
+                "base_tax_canceled": {
+                    "type": "number"
+                },
+                "base_total_canceled": {
+                    "type": "number"
+                },
+                "base_total_due": {
+                    "type": "number"
+                },
+                "base_to_global_rate": {
+                    "type": "integer"
+                },
+                "base_to_order_rate": {
+                    "type": "integer"
+                },
+                "billing_address_id": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "customer_email": {
+                    "$ref": "#/definitions/Email"
+                },
+                "customer_firstname": {
+                    "$ref": "#/definitions/Firstname"
+                },
+                "customer_is_guest": {
+                    "type": "integer"
+                },
+                "customer_lastname": {
+                    "$ref": "#/definitions/Lastname"
+                },
+                "customer_note_notify": {
+                    "type": "integer"
+                },
+                "discount_amount": {
+                    "type": "integer"
+                },
+                "discount_canceled": {
+                    "type": "integer"
+                },
+                "email_sent": {
+                    "type": "integer"
+                },
+                "entity_id": {
+                    "type": "integer"
+                },
+                "global_currency_code": {
+                    "$ref": "#/definitions/CurrencyCode"
+                },
+                "grand_total": {
+                    "type": "number"
+                },
+                "discount_tax_compensation_amount": {
+                    "type": "integer"
+                },
+                "increment_id": {
+                    "type": "string"
+                },
+                "is_virtual": {
+                    "type": "integer"
+                },
+                "order_currency_code": {
+                    "$ref": "#/definitions/CurrencyCode"
+                },
+                "protect_code": {
+                    "type": "string"
+                },
+                "quote_id": {
+                    "type": "integer"
+                },
+                "remote_ip": {
+                    "$ref": "#/definitions/RemoteIP"
+                },
+                "shipping_amount": {
+                    "type": "integer"
+                },
+                "shipping_canceled": {
+                    "type": "integer"
+                },
+                "shipping_description": {
+                    "$ref": "#/definitions/ShippingDescription"
+                },
+                "shipping_discount_amount": {
+                    "type": "integer"
+                },
+                "shipping_discount_tax_compensation_amount": {
+                    "type": "integer"
+                },
+                "shipping_incl_tax": {
+                    "type": "integer"
+                },
+                "shipping_tax_amount": {
+                    "type": "integer"
+                },
+                "state": {
+                    "$ref": "#/definitions/Stat"
+                },
+                "status": {
+                    "$ref": "#/definitions/Stat"
+                },
+                "store_currency_code": {
+                    "$ref": "#/definitions/CurrencyCode"
+                },
+                "store_id": {
+                    "type": "integer"
+                },
+                "store_name": {
+                    "$ref": "#/definitions/StoreName"
+                },
+                "store_to_base_rate": {
+                    "type": "integer"
+                },
+                "store_to_order_rate": {
+                    "type": "integer"
+                },
+                "subtotal": {
+                    "type": "number"
+                },
+                "subtotal_canceled": {
+                    "type": "number"
+                },
+                "subtotal_incl_tax": {
+                    "type": "number"
+                },
+                "tax_amount": {
+                    "type": "number"
+                },
+                "tax_canceled": {
+                    "type": "number"
+                },
+                "total_canceled": {
+                    "type": "number"
+                },
+                "total_due": {
+                    "type": "number"
+                },
+                "total_item_count": {
+                    "type": "integer"
+                },
+                "total_qty_ordered": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "weight": {
+                    "type": "integer"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ShippingAssignmentItem"
+                    }
+                },
+                "billing_address": {
+                    "$ref": "#/definitions/Address"
+                },
+                "payment": {
+                    "$ref": "#/definitions/Payment"
+                },
+                "status_histories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/StatusHistory"
+                    }
+                },
+                "extension_attributes": {
+                    "$ref": "#/definitions/ExtensionAttributes"
+                },
+                "customer_dob": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "customer_gender": {
+                    "type": "integer"
+                },
+                "customer_group_id": {
+                    "type": "integer"
+                },
+                "customer_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "base_currency_code",
+                "base_discount_amount",
+                "base_discount_canceled",
+                "base_discount_tax_compensation_amount",
+                "base_grand_total",
+                "base_shipping_amount",
+                "base_shipping_canceled",
+                "base_shipping_discount_amount",
+                "base_shipping_discount_tax_compensation_amnt",
+                "base_shipping_incl_tax",
+                "base_shipping_tax_amount",
+                "base_subtotal",
+                "base_subtotal_canceled",
+                "base_subtotal_incl_tax",
+                "base_tax_amount",
+                "base_tax_canceled",
+                "base_to_global_rate",
+                "base_to_order_rate",
+                "base_total_canceled",
+                "base_total_due",
+                "billing_address",
+                "billing_address_id",
+                "created_at",
+                "customer_email",
+                "customer_firstname",
+                "customer_is_guest",
+                "customer_lastname",
+                "customer_note_notify",
+                "discount_amount",
+                "discount_canceled",
+                "discount_tax_compensation_amount",
+                "email_sent",
+                "entity_id",
+                "extension_attributes",
+                "global_currency_code",
+                "grand_total",
+                "increment_id",
+                "is_virtual",
+                "items",
+                "order_currency_code",
+                "payment",
+                "protect_code",
+                "quote_id",
+                "remote_ip",
+                "shipping_amount",
+                "shipping_canceled",
+                "shipping_description",
+                "shipping_discount_amount",
+                "shipping_discount_tax_compensation_amount",
+                "shipping_incl_tax",
+                "shipping_tax_amount",
+                "state",
+                "status",
+                "status_histories",
+                "store_currency_code",
+                "store_id",
+                "store_name",
+                "store_to_base_rate",
+                "store_to_order_rate",
+                "subtotal",
+                "subtotal_canceled",
+                "subtotal_incl_tax",
+                "tax_amount",
+                "tax_canceled",
+                "total_canceled",
+                "total_due",
+                "total_item_count",
+                "total_qty_ordered",
+                "updated_at",
+                "weight"
+            ],
+            "title": "Welcome9Item"
+        },
+        "Address": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "address_type": {
+                    "$ref": "#/definitions/AddressType"
+                },
+                "city": {
+                    "$ref": "#/definitions/City"
+                },
+                "country_id": {
+                    "$ref": "#/definitions/CountryID"
+                },
+                "email": {
+                    "$ref": "#/definitions/Email"
+                },
+                "entity_id": {
+                    "type": "integer"
+                },
+                "firstname": {
+                    "$ref": "#/definitions/Firstname"
+                },
+                "lastname": {
+                    "$ref": "#/definitions/Lastname"
+                },
+                "parent_id": {
+                    "type": "integer"
+                },
+                "postcode": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "region": {
+                    "$ref": "#/definitions/Region"
+                },
+                "region_code": {
+                    "$ref": "#/definitions/RegionCode"
+                },
+                "region_id": {
+                    "type": "integer"
+                },
+                "street": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Street"
+                    }
+                },
+                "telephone": {
+                    "type": "string"
+                },
+                "customer_address_id": {
+                    "type": "integer"
+                },
+                "company": {
+                    "type": "string"
+                },
+                "vat_id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "address_type",
+                "city",
+                "country_id",
+                "email",
+                "entity_id",
+                "firstname",
+                "lastname",
+                "parent_id",
+                "postcode",
+                "region",
+                "region_code",
+                "region_id",
+                "street",
+                "telephone"
+            ],
+            "title": "Address"
+        },
+        "ExtensionAttributes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "shipping_assignments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ShippingAssignment"
+                    }
+                },
+                "payment_additional_info": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PaymentAdditionalInfo"
+                    }
+                },
+                "applied_taxes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AppliedTax"
+                    }
+                },
+                "item_applied_taxes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ItemAppliedTax"
+                    }
+                },
+                "converting_from_quote": {
+                    "type": "boolean"
+                },
+                "sources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Source"
+                    }
+                },
+                "fiscal_code": {
+                    "$ref": "#/definitions/FiscalCode"
+                },
+                "fiscal_company": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "swissup_checkout_fields": {
+                    "type": "array",
+                    "items": {}
+                },
+                "fiscal_sdi": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "applied_taxes",
+                "converting_from_quote",
+                "fiscal_code",
+                "fiscal_company",
+                "item_applied_taxes",
+                "payment_additional_info",
+                "shipping_assignments",
+                "sources",
+                "swissup_checkout_fields"
+            ],
+            "title": "ExtensionAttributes"
+        },
+        "AppliedTax": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "$ref": "#/definitions/Code"
+                },
+                "title": {
+                    "$ref": "#/definitions/Code"
+                },
+                "percent": {
+                    "type": "integer"
+                },
+                "amount": {
+                    "type": "number"
+                },
+                "base_amount": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "amount",
+                "base_amount",
+                "code",
+                "percent",
+                "title"
+            ],
+            "title": "AppliedTax"
+        },
+        "ItemAppliedTax": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                },
+                "item_id": {
+                    "type": "integer"
+                },
+                "applied_taxes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AppliedTax"
                     }
                 }
             },
             "required": [
-                "indeedCtk",
-                "jobListings"
+                "applied_taxes",
+                "item_id",
+                "type"
             ],
-            "title": "JobListings"
+            "title": "ItemAppliedTax"
         },
-        "JobListing": {
+        "PaymentAdditionalInfo": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "jobview": {
-                    "$ref": "#/definitions/Jobview"
-                }
-            },
-            "required": [
-                "jobview"
-            ],
-            "title": "JobListing"
-        },
-        "Jobview": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "header": {
-                    "$ref": "#/definitions/Header"
-                }
-            },
-            "required": [
-                "header"
-            ],
-            "title": "Jobview"
-        },
-        "Header": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "adOrderId": {
-                    "type": "integer"
+                "key": {
+                    "$ref": "#/definitions/Key"
                 },
-                "advertiserType": {
+                "value": {
                     "type": "string"
                 }
             },
             "required": [
-                "adOrderId",
-                "advertiserType"
+                "key",
+                "value"
             ],
-            "title": "Header"
+            "title": "PaymentAdditionalInfo"
+        },
+        "ShippingAssignment": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "shipping": {
+                    "$ref": "#/definitions/Shipping"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ShippingAssignmentItem"
+                    }
+                }
+            },
+            "required": [
+                "items",
+                "shipping"
+            ],
+            "title": "ShippingAssignment"
+        },
+        "ShippingAssignmentItem": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "amount_refunded": {
+                    "type": "integer"
+                },
+                "base_amount_refunded": {
+                    "type": "integer"
+                },
+                "base_discount_amount": {
+                    "type": "integer"
+                },
+                "base_discount_invoiced": {
+                    "type": "integer"
+                },
+                "base_discount_tax_compensation_amount": {
+                    "type": "integer"
+                },
+                "base_original_price": {
+                    "type": "number"
+                },
+                "base_price": {
+                    "type": "number"
+                },
+                "base_price_incl_tax": {
+                    "type": "number"
+                },
+                "base_row_invoiced": {
+                    "type": "integer"
+                },
+                "base_row_total": {
+                    "type": "number"
+                },
+                "base_row_total_incl_tax": {
+                    "type": "number"
+                },
+                "base_tax_amount": {
+                    "type": "number"
+                },
+                "base_tax_invoiced": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "discount_amount": {
+                    "type": "integer"
+                },
+                "discount_invoiced": {
+                    "type": "integer"
+                },
+                "discount_percent": {
+                    "type": "integer"
+                },
+                "free_shipping": {
+                    "type": "integer"
+                },
+                "discount_tax_compensation_amount": {
+                    "type": "integer"
+                },
+                "discount_tax_compensation_canceled": {
+                    "type": "integer"
+                },
+                "is_qty_decimal": {
+                    "type": "integer"
+                },
+                "is_virtual": {
+                    "type": "integer"
+                },
+                "item_id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "no_discount": {
+                    "type": "integer"
+                },
+                "order_id": {
+                    "type": "integer"
+                },
+                "original_price": {
+                    "type": "number"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "price_incl_tax": {
+                    "type": "number"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "product_type": {
+                    "$ref": "#/definitions/ProductType"
+                },
+                "qty_canceled": {
+                    "type": "integer"
+                },
+                "qty_invoiced": {
+                    "type": "integer"
+                },
+                "qty_ordered": {
+                    "type": "integer"
+                },
+                "qty_refunded": {
+                    "type": "integer"
+                },
+                "qty_shipped": {
+                    "type": "integer"
+                },
+                "quote_item_id": {
+                    "type": "integer"
+                },
+                "row_invoiced": {
+                    "type": "integer"
+                },
+                "row_total": {
+                    "type": "number"
+                },
+                "row_total_incl_tax": {
+                    "type": "number"
+                },
+                "row_weight": {
+                    "type": "integer"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "store_id": {
+                    "type": "integer"
+                },
+                "tax_amount": {
+                    "type": "number"
+                },
+                "tax_canceled": {
+                    "type": "number"
+                },
+                "tax_invoiced": {
+                    "type": "integer"
+                },
+                "tax_percent": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "amount_refunded",
+                "base_amount_refunded",
+                "base_discount_amount",
+                "base_discount_invoiced",
+                "base_discount_tax_compensation_amount",
+                "base_original_price",
+                "base_price",
+                "base_price_incl_tax",
+                "base_row_invoiced",
+                "base_row_total",
+                "base_row_total_incl_tax",
+                "base_tax_amount",
+                "base_tax_invoiced",
+                "created_at",
+                "discount_amount",
+                "discount_invoiced",
+                "discount_percent",
+                "discount_tax_compensation_amount",
+                "discount_tax_compensation_canceled",
+                "free_shipping",
+                "is_qty_decimal",
+                "is_virtual",
+                "item_id",
+                "name",
+                "no_discount",
+                "order_id",
+                "original_price",
+                "price",
+                "price_incl_tax",
+                "product_id",
+                "product_type",
+                "qty_canceled",
+                "qty_invoiced",
+                "qty_ordered",
+                "qty_refunded",
+                "qty_shipped",
+                "quote_item_id",
+                "row_invoiced",
+                "row_total",
+                "row_total_incl_tax",
+                "row_weight",
+                "sku",
+                "store_id",
+                "tax_amount",
+                "tax_canceled",
+                "tax_invoiced",
+                "tax_percent",
+                "updated_at"
+            ],
+            "title": "ShippingAssignmentItem"
+        },
+        "Shipping": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/Address"
+                },
+                "method": {
+                    "$ref": "#/definitions/ShippingMethod"
+                },
+                "total": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "address",
+                "method",
+                "total"
+            ],
+            "title": "Shipping"
+        },
+        "Source": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "source_code": {
+                    "$ref": "#/definitions/SourceCode"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "qty_to_deduct": {
+                    "type": "integer"
+                },
+                "qty_available": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "qty_available",
+                "qty_to_deduct",
+                "sku",
+                "source_code"
+            ],
+            "title": "Source"
+        },
+        "Payment": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "account_status": {
+                    "type": "null"
+                },
+                "additional_information": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "amount_ordered": {
+                    "type": "number"
+                },
+                "base_amount_ordered": {
+                    "type": "number"
+                },
+                "base_shipping_amount": {
+                    "type": "integer"
+                },
+                "cc_exp_year": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "cc_last4": {
+                    "type": "null"
+                },
+                "cc_ss_start_month": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "cc_ss_start_year": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "entity_id": {
+                    "type": "integer"
+                },
+                "method": {
+                    "$ref": "#/definitions/PaymentMethod"
+                },
+                "parent_id": {
+                    "type": "integer"
+                },
+                "shipping_amount": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "account_status",
+                "additional_information",
+                "amount_ordered",
+                "base_amount_ordered",
+                "base_shipping_amount",
+                "cc_exp_year",
+                "cc_last4",
+                "cc_ss_start_month",
+                "cc_ss_start_year",
+                "entity_id",
+                "method",
+                "parent_id",
+                "shipping_amount"
+            ],
+            "title": "Payment"
+        },
+        "StatusHistory": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "comment": {
+                    "$ref": "#/definitions/Comment"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "entity_id": {
+                    "type": "integer"
+                },
+                "entity_name": {
+                    "$ref": "#/definitions/EntityName"
+                },
+                "is_customer_notified": {
+                    "type": "null"
+                },
+                "is_visible_on_front": {
+                    "type": "integer"
+                },
+                "parent_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "comment",
+                "created_at",
+                "entity_id",
+                "entity_name",
+                "is_customer_notified",
+                "is_visible_on_front",
+                "parent_id"
+            ],
+            "title": "StatusHistory"
+        },
+        "SearchCriteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "filter_groups": {
+                    "type": "array",
+                    "items": {}
+                },
+                "page_size": {
+                    "type": "integer"
+                },
+                "current_page": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "current_page",
+                "filter_groups",
+                "page_size"
+            ],
+            "title": "SearchCriteria"
+        },
+        "CurrencyCode": {
+            "type": "string",
+            "enum": [
+                "EUR"
+            ],
+            "title": "CurrencyCode"
+        },
+        "AddressType": {
+            "type": "string",
+            "enum": [
+                "billing",
+                "shipping"
+            ],
+            "title": "AddressType"
+        },
+        "City": {
+            "type": "string",
+            "enum": [
+                "test",
+                "Test",
+                "San Marino"
+            ],
+            "title": "City"
+        },
+        "CountryID": {
+            "type": "string",
+            "enum": [
+                "IT"
+            ],
+            "title": "CountryID"
+        },
+        "Email": {
+            "type": "string",
+            "enum": [
+                "jessica.mazzola@thespacesm.com",
+                "test1@test.com",
+                "jessicamazzola@hotmail.com",
+                "niccolo.forcellini@thespacesm.com"
+            ],
+            "title": "Email"
+        },
+        "Firstname": {
+            "type": "string",
+            "enum": [
+                "jessica",
+                "Jessica",
+                "Test",
+                "Niccolo"
+            ],
+            "title": "Firstname"
+        },
+        "Lastname": {
+            "type": "string",
+            "enum": [
+                "mazzola",
+                "Mazzola",
+                "Test",
+                "Forcellini"
+            ],
+            "title": "Lastname"
+        },
+        "Region": {
+            "type": "string",
+            "enum": [
+                "Rimini",
+                "Agrigento"
+            ],
+            "title": "Region"
+        },
+        "RegionCode": {
+            "type": "string",
+            "enum": [
+                "RN",
+                "AG"
+            ],
+            "title": "RegionCode"
+        },
+        "Street": {
+            "type": "string",
+            "enum": [
+                "test",
+                "Test 1",
+                "Via Via"
+            ],
+            "title": "Street"
+        },
+        "Code": {
+            "type": "string",
+            "enum": [
+                "Italy (reduced: transport / hotels / restaurants)"
+            ],
+            "title": "Code"
+        },
+        "FiscalCode": {
+            "type": "string",
+            "enum": [
+                "MZZJSC99B55H294L",
+                "XVTSBH33H47L034B",
+                "FRCNCL91R02Z130Y"
+            ],
+            "title": "FiscalCode"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "product"
+            ],
+            "title": "Type"
+        },
+        "Key": {
+            "type": "string",
+            "enum": [
+                "method_title",
+                "instructions"
+            ],
+            "title": "Key"
+        },
+        "ProductType": {
+            "type": "string",
+            "enum": [
+                "simple"
+            ],
+            "title": "ProductType"
+        },
+        "ShippingMethod": {
+            "type": "string",
+            "enum": [
+                "amstorepick_amstorepick1",
+                "owsh1_free_shipping_it_sm_above29_90euro",
+                "amstorepick_amstorepick2"
+            ],
+            "title": "ShippingMethod"
+        },
+        "SourceCode": {
+            "type": "string",
+            "enum": [
+                "afarma",
+                "ravenna_farmacia"
+            ],
+            "title": "SourceCode"
+        },
+        "PaymentMethod": {
+            "type": "string",
+            "enum": [
+                "banktransfer"
+            ],
+            "title": "PaymentMethod"
+        },
+        "RemoteIP": {
+            "type": "string",
+            "enum": [
+                "194.183.83.158"
+            ],
+            "title": "RemoteIP"
+        },
+        "ShippingDescription": {
+            "type": "string",
+            "enum": [
+                "Ritiro in Sede (Punto Vendita di Via Rotta 65/a, Ravenna)",
+                "Spedizione Gratuita sopra 29.90€",
+                "Ritiro in Sede (Store di Via Cesari 4, Ravenna)"
+            ],
+            "title": "ShippingDescription"
+        },
+        "Stat": {
+            "type": "string",
+            "enum": [
+                "canceled"
+            ],
+            "title": "Stat"
+        },
+        "Comment": {
+            "type": "string",
+            "enum": [
+                "Data di consegna prevista: Venerdì 28/07/2023"
+            ],
+            "title": "Comment"
+        },
+        "EntityName": {
+            "type": "string",
+            "enum": [
+                "order"
+            ],
+            "title": "EntityName"
+        },
+        "StoreName": {
+            "type": "string",
+            "enum": [
+                "Main Website\nMain Website Store\nDefault Store View"
+            ],
+            "title": "StoreName"
         }
     }
 }
