@@ -44,6 +44,9 @@ class ModelProperty:
 
     def get_serialized_type(self, default_types):
         full_type = self.get_full_type(default_types)
+        # remove trailing / from full_type
+        if (full_type[-1] == "/"):
+            full_type = full_type[:-1]
         serialized_type = full_type if not self.many else "array<" + full_type + ">"
         return serialized_type
 
