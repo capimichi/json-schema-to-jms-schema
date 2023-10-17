@@ -37,6 +37,9 @@ class ModelProperty:
         var_type = full_type
         if (self.many):
             var_type += "[]"
+
+        var_type += "|null"
+
         return var_type
 
     def get_serialized_type(self, default_types):
@@ -47,6 +50,5 @@ class ModelProperty:
     def get_setter_type(self, default_types):
         full_type = self.get_full_type(default_types)
         if (self.many):
-            return "array"
-        else:
-            return full_type
+            full_type = "array"
+        return "?" + full_type
